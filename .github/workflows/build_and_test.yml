@@ -20,4 +20,4 @@ jobs:
           pylint **/*.py --exit-zero --output-format=colorized
       - name: Test with unittest
         run: |
-          python -m unittest discover -s tests
+          python -m unittest discover -s src/tests
