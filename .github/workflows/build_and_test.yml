@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pylint pytest
-          pip install -r requirements.txt; fi
+          pip install -r requirements.txt
       - name: Lint with pylint
         run: |
           pylint **/*.py --output-format=colorized
