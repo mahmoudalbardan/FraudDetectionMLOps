@@ -1,0 +1,26 @@
+name: Deploy Model
+
+on:
+  push:
+    branches: [ "main" ]  # Trigger deployment on push to main
+  workflow_dispatch:       # Allows manual triggering of deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: SSH to On-Premises Server
+        run: |
+          ssh -o StrictHostKeyChecking=no user@your-on-prem-server "docker pull your-docker-repo/my-model:latest"
+          ssh -o StrictHostKeyChecking=no user@your-on-prem-server "docker stop my-model-container || true"
+          ssh -o StrictHostKeyChecking=no user@your-on-prem-server "docker rm my-model-container || true"
+          ssh -o StrictHostKeyChecking=no user@your-on-prem-server "docker run -d --name my-model-container -p 5000:5000 your-docker-repo/my-model:latest"
