@@ -11,3 +11,5 @@ def build_model(data_transformed):
                             random_state=42)
     model.fit(X_scaled)
     return model
+
+

@@ -1,7 +1,10 @@
 import unittest
+
 import pandas as pd
-from src.scripts.data_loader import read_file
-from src.scripts.data_transformer import transform_data
+
+from src.scripts.process_data import read_file
+from src.scripts.process_data import transform_data
+
 
 class TestDataProcessing(unittest.TestCase):
     def test_read_file_invalid(self):
@@ -19,9 +22,9 @@ class TestDataProcessing(unittest.TestCase):
         })
         transformed_df = transform_data(df)
         # Check that the shape remains the same
-        self.assertEqual(transformed_df.shape, df.shape, "Shape should remain the same")
+        self.assertEqual(transformed_df.shape, df.shape)  # shape should be the same
         # Check that the 'Class' column remains unchanged
-        self.assertTrue(all(transformed_df['Class'] == df['Class']), "Class column should remain unchanged")
+        self.assertTrue(all(transformed_df['Class'] == df['Class']))  # Class column should remain unchanged
 
     def test_transform_data_no_skew(self):
         """Test that data remains unchanged when no skewness is present."""
@@ -38,8 +41,3 @@ class TestDataProcessing(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-

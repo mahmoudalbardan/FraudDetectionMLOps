@@ -1,6 +1,6 @@
 filepath = "/home/mahmoud/Documents/test ubisoft/data/creditcard.csv"
 
-from src.scripts import data_loader, data_explorer, data_transformer
+from src.scripts import process_data, data_explorer, data_transformer
 from src.scripts import train_model, evaluate_model, save_model
 
 
