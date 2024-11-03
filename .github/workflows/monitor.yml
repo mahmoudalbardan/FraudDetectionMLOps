@@ -1,0 +1,36 @@
+name:  monitor model to retrain or not
+
+on:
+  schedule:
+    - cron:  '8 * * * *'    #'0 0 * * 0' # check weekly (every sunday)
+  workflow_dispatch:
+
+jobs:
+  monitor_and_retrain:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: install dependencies
+        run: pip install -r requirements.txt
+
+      - name: run monitoring script to check performance
+        run: |
+          python src/scripts/monitor.py --configuration configuration.ini
+
+
+      - name: read monitor.txt
+        run: |
+          echo "MONITOR_STATUS=$(cat monitoring_output/monitor.txt)" >> $GITHUB_ENV
+
+
+      - name: decision
+        run: |
+          if [ "MONITOR_STATUS" = "retrain new model" ]; then
+            echo "retraining model"
+            python src/scripts/train_model.py --configuration configuration.ini
+          else
+            echo "no retraining. model performance is good"
+          fi

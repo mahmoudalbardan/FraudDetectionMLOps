@@ -1,12 +1,14 @@
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import seaborn as sns
+
 sns.set_theme(style="whitegrid")
 
 
 def read_file(filepath):
     return pd.read_csv(filepath, sep=",")
+
 
 def explore_data(data):
     data_info = data.info()
@@ -22,9 +24,10 @@ def explore_data(data):
         axes[j].set_title("histogram of {feature}".format(feature=feature))
         axes[j].set_xlabel(feature)
 
-    #plt.tight_layout()
+    # plt.tight_layout()
     plt.show()
     return data_info, data_describe, data_class_frequency
+
 
 def transform_data(data):
     data_transformed = data.copy()
@@ -41,12 +44,7 @@ def transform_data(data):
 
 def process_data(filepath):
     data = read_file(filepath)
-    data_info, data_describe, data_class_frequency = explore_data(data)
+    #data_info, data_describe, data_class_frequency = explore_data(data)
     data_transformed = transform_data(data)
     return data_transformed
 
-
-if __name__ == "__main__":
-    filepath = "/home/mahmoud/Documents/test ubisoft/data/creditcard.csv"
-    data_transformed = process_data(filepath)
-    print("done")
