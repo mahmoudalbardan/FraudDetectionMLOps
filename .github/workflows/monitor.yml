@@ -1,4 +1,4 @@
-name:  monitor model to retrain or not
+name:  monitor model
 
 on:
   schedule:
