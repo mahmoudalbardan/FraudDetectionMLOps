@@ -23,7 +23,7 @@ jobs:
 
       - name: read monitor.txt
         run: |
-          echo "MONITOR_STATUS=$(cat monitoring_output/monitor.txt)" >> $GITHUB_ENV
+          echo "MONITOR_STATUS=$(cat src/monitoring_output/monitor.txt)" >> $GITHUB_ENV
 
 
       - name: decision
