@@ -2,7 +2,7 @@ name:  monitor model to retrain or not
 
 on:
   schedule:
-    - cron:  '9 * * * *'    #'0 0 * * 0' # check weekly (every sunday)
+    - cron:  '0 0 * * 0' # check weekly (every sunday)
   workflow_dispatch:
 
 jobs:
