@@ -36,8 +36,13 @@ def save_model(model, model_path):
     joblib.dump(model, model_path)
 
 
-def main(config):
-    data_transformed = process_data(config["FILES"]["DATA_PATH"])
+def main(args):
+    config = get_config(args.configuration)
+    retrain = args.retrain
+    if retrain == "false":
+        data_transformed = process_data(config["FILES"]["DATA_PATH"])
+    if retrain  == "true":
+        data_transformed = process_data(config["FILES"]["SAMPLE_DATA_PATH"])
     model = fit_model(data_transformed)
     recall, precision, f1s = evaluate_model(model, data_transformed)
     save_model(model, config["FILES"]["MODEL_PATH"])
@@ -45,5 +50,4 @@ def main(config):
 
 if __name__ == "__main__":
     args = parse_args()
-    config = get_config(args.configuration)
-    main(config)
+    main(args)

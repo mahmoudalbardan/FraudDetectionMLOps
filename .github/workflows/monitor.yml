@@ -32,7 +32,7 @@ jobs:
         run: |
           if [ "$MONITOR_STATUS" == "retrain new model" ]; then
             echo "retraining model"
-            python src/scripts/train_model.py --configuration configuration.ini
+            python src/scripts/train_model.py --configuration configuration.ini  --retrain true
           else
             echo "no retraining. model performance is good"
           fi
