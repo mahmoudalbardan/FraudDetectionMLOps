@@ -3,13 +3,15 @@ import numpy as np
 import seaborn as sns
 
 sns.set_theme(style="whitegrid")
-
+import os
 from google.cloud import storage
 import pandas as pd
 from io import StringIO
 
 
 def read_file(gcs_bucket_name, gcs_filename):
+    credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+    print(credentials_path)
     storage_client = storage.Client()
     bucket = storage_client.bucket(gcs_bucket_name)
     blob = bucket.blob(gcs_filename)

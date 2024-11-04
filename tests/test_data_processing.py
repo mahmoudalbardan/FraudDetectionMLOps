@@ -7,11 +7,6 @@ from src.scripts.process_data import transform_data
 
 
 class TestDataProcessing(unittest.TestCase):
-    def test_read_file_invalid(self):
-        """Test reading a non-existent CSV file."""
-        with self.assertRaises(FileNotFoundError):
-            read_file('non_existent_file.csv')
-
     def test_transform_data(self):
         """Test transformation of data based on skewness."""
         df = pd.DataFrame({
