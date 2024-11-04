@@ -18,6 +18,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: setup GCP credentials
+        run: |
+          echo "${{secrets.GCP_SERVICE_ACCOUNT_KEY}}" > gcpkey.json
+          export GCP_CREDENTIALS="gcpkey.json"
+          cat gcpkey.json
+
       - name: train the model
         run: |
           python src/scripts/train_model.py --configuration configuration.ini --retrain false

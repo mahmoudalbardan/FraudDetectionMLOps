@@ -1,14 +1,22 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 import seaborn as sns
 
 sns.set_theme(style="whitegrid")
 
+from google.cloud import storage
+import pandas as pd
+from io import StringIO
 
-def read_file(filepath):
-    return pd.read_csv(filepath, sep=",")
 
+def read_file(gcs_bucket_name, gcs_filename):
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(gcs_bucket_name)
+    blob = bucket.blob(gcs_filename)
+    csv_content = blob.download_as_text()
+    file = StringIO(csv_content)
+    data = pd.read_csv(file, sep=",")
+    return data
 
 def explore_data(data):
     data_info = data.info()
@@ -42,9 +50,8 @@ def transform_data(data):
     return data_transformed
 
 
-def process_data(filepath):
-    data = read_file(filepath)
-    #data_info, data_describe, data_class_frequency = explore_data(data)
+def process_data(gcs_bucket_name, gcs_filename):
+    data = read_file(gcs_bucket_name, gcs_filename)
+    # data_info, data_describe, data_class_frequency = explore_data(data)
     data_transformed = transform_data(data)
     return data_transformed
-

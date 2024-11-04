@@ -40,9 +40,11 @@ def main(args):
     config = get_config(args.configuration)
     retrain = args.retrain
     if retrain == "false":
-        data_transformed = process_data(config["FILES"]["DATA_PATH"])
+        data_transformed = process_data(config["FILES"]["GCS_BUCKET_NAME"],
+                                        config["FILES"]["GCS_FIlE_NAME"])
     if retrain  == "true":
-        data_transformed = process_data(config["FILES"]["SAMPLE_DATA_PATH"])
+        data_transformed = process_data(config["FILES"]["GCS_BUCKET_NAME"],
+                                        config["FILES"]["SAMPLE_GCS_FIlE_NAME"])
     model = fit_model(data_transformed)
     recall, precision, f1s = evaluate_model(model, data_transformed)
     save_model(model, config["FILES"]["MODEL_PATH"])
