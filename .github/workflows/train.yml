@@ -21,8 +21,8 @@ jobs:
       - name: Decode GCP key and save to JSON file
         run: |
           echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 --decode > gcpkey.json
-          echo "Decoded GCP Key JSON:"
           cat gcpkey.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=gcpkey.json" >> $GITHUB_ENV
         shell: /usr/bin/bash -e {0}
 
       - name: train the model
