@@ -1,8 +1,10 @@
 name: deploy model
 
 on:
-  push:
-    branches: ["main"]
+  workflow_run:
+    workflows: ["train model"]
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
@@ -24,7 +26,7 @@ jobs:
 
       - name: build and tag docker image
         run: |
-          docker build -t mahmoudalbardan/fraudapp:latest Dockerfile
+          docker build -t mahmoudalbardan/fraudapp:latest .
           docker tag mahmoudalbardan/fraudapp:latest mahmoudalbardan/fraudapp:${{github.sha}}
 
       - name: push built image to docker hub

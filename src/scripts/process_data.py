@@ -3,21 +3,13 @@ import numpy as np
 import seaborn as sns
 
 sns.set_theme(style="whitegrid")
-import os
+
 from google.cloud import storage
 import pandas as pd
 from io import StringIO
 
 
 def read_file(gcs_bucket_name, gcs_filename):
-    import os
-    print("Current working directory:", os.getcwd())
-    print(os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
-
-    # import json
-    # with open(credentials_path, 'r') as file:
-    #    d = json.load(file)
-    # print(d)
     storage_client = storage.Client()
     bucket = storage_client.bucket(gcs_bucket_name)
     blob = bucket.blob(gcs_filename)
@@ -25,6 +17,7 @@ def read_file(gcs_bucket_name, gcs_filename):
     file = StringIO(csv_content)
     data = pd.read_csv(file, sep=",")
     return data
+
 
 def explore_data(data):
     data_info = data.info()
