@@ -20,7 +20,7 @@ jobs:
 
       - name: setup GCP credentials
         run: |
-          echo "${{secrets.GCP_SERVICE_ACCOUNT_KEY}}" > gcpkey.json
+          printf "%s" "${{secrets.GCP_SERVICE_ACCOUNT_KEY}}" > gcpkey.json
           echo "saved to gcpkey.json"
           echo "Setting GOOGLE_APPLICATION_CREDENTIALS environment variable"
           echo "GOOGLE_APPLICATION_CREDENTIALS=gcpkey.json" >> $GITHUB_ENV
