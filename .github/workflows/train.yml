@@ -28,6 +28,8 @@ jobs:
 
       - name: train the model
         run: |
+          ls -al
+          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
           python src/scripts/train_model.py --configuration configuration.ini --retrain false
 
       - name: upload model artifact

@@ -10,6 +10,8 @@ from io import StringIO
 
 
 def read_file(gcs_bucket_name, gcs_filename):
+    import os
+    print("Current working directory:", os.getcwd())
     credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
     print(credentials_path)
     import json
