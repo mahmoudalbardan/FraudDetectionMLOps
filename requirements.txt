@@ -9,10 +9,3 @@ joblib==1.4.2
 google-cloud-storage==2.18.2
 pylint
 pytest
-
-
-
-
-
-#
-GOOGLE_APPLICATION_CREDENTIALS=gcpkey.json
