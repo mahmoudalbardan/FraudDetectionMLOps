@@ -11,7 +11,9 @@ from io import StringIO
 
 def read_file(gcs_bucket_name, gcs_filename):
     credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-    print(credentials_path)
+    import json
+    with open(credentials_path, 'r') as file:
+        print(json.load(file))
     storage_client = storage.Client()
     bucket = storage_client.bucket(gcs_bucket_name)
     blob = bucket.blob(gcs_filename)
