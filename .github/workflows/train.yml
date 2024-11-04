@@ -21,7 +21,8 @@ jobs:
       - name:
         run: |
             echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY_BASE64 }}" | base64 --decode > gcpkey.json
-            echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/gcpkey.json" >> $GITHUB_ENV
+            echo "Setting GOOGLE_APPLICATION_CREDENTIALS environment variable"
+            echo "GOOGLE_APPLICATION_CREDENTIALS=gcpkey.json" >> $GITHUB_ENV
             cat gcpkey.json
 
       - name: train the model
