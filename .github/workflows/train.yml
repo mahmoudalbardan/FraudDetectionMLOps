@@ -20,7 +20,7 @@ jobs:
 
       - name: Decode GCP key and save to JSON file
         run: |
-          echo "${{ secrets.GCP_KEY_BASE64 }}" | base64 --decode > gcpkey.json
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 --decode > gcpkey.json
           echo "Decoded GCP Key JSON:"
           cat gcpkey.json
         shell: /usr/bin/bash -e {0}
