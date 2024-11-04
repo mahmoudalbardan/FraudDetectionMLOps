@@ -2,7 +2,6 @@ import unittest
 
 import pandas as pd
 
-from src.scripts.process_data import read_file
 from src.scripts.process_data import transform_data
 
 
