@@ -1,8 +1,8 @@
-name:  monitor model
+name: monitor model
 
 on:
   schedule:
-    - cron:  '0 0 * * 0' # check weekly (every sunday)
+    - cron: '0 0 * * 0' # check weekly (every sunday)
   workflow_dispatch:
 
 jobs:
@@ -16,8 +16,16 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
 
+      - name: decode gcp key and write it in json file
+        run: |
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 --decode > gcpkey.json
+          cat gcpkey.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=gcpkey.json" >> $GITHUB_ENV
+        shell: /usr/bin/bash -e {0}
+
       - name: run monitoring script to check performance
         run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
           python src/scripts/monitor.py --configuration configuration.ini
 
 

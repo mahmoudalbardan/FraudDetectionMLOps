@@ -18,7 +18,7 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Decode GCP key and save to JSON file
+      - name: decode gcp key and write it in json file
         run: |
           echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 --decode > gcpkey.json
           cat gcpkey.json
@@ -27,7 +27,6 @@ jobs:
 
       - name: train the model
         run: |
-          ls -al
           echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
           python src/scripts/train_model.py --configuration configuration.ini --retrain false
 
