@@ -21,15 +21,9 @@ jobs:
       - name:
         run: |
             echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY_BASE64 }}" | base64 --decode > gcpkey.json
+            cat gcpkey.json
             echo "Setting GOOGLE_APPLICATION_CREDENTIALS environment variable"
             echo "GOOGLE_APPLICATION_CREDENTIALS=gcpkey.json" >> $GITHUB_ENV
-            cat -n gcpkey.json
-          
-
-      - name: Verify JSON file format (optional)
-        run: |
-          python -m json.tool gcpkey.json  # Validates that the decoded file is JSON
-
 
       - name: train the model
         run: |
