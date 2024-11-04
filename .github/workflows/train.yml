@@ -18,11 +18,14 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: setup GCP credentials
-        run: |
-          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY_BASE64}}" | base64 --decode > gcpkey.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/gcpkey.json" >> $GITHUB_ENV
-          cat gcpkey.json
+      - name:
+          run: |
+            # Decode the base64-encoded key and save it to gcpkey.json
+            echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY_BASE64 }}" | base64 --decode > gcpkey.json
+
+            # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the file path
+            echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/gcpkey.json" >> $GITHUB_ENV
+            cat gcpkey.json
 
       - name: train the model
         run: |
