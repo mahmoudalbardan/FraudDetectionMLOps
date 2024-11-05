@@ -8,6 +8,18 @@ performance monitoring. The project also includes CI/CD automation with
 with github actions, integrating with Google Cloud Platform that is used to store the data.
 
 
+The data is first extracted from a GCP storage bucket, followed by exploratory data analysis.
+Histogram plots indicates high skewness in some features, thus a log transformation on those 
+with skewness values above 2 is applied to help normalize their distributions. Next, the features are standardized,
+and an Isolation Forest model is trained on the transformed data. For this fraud detection model, recall is the priority metric, as high recall improves the detection rate 
+of fraudulent transactions. Precision is also important since low precision could lead to mislabeling 
+many legitimate transactions as fraudulent, affecting user experience and trust.
+The current model performance are 81% for recall and 6% for precision. 
+While the model requires more improvement through EDA
+and feature engineering, this project focuses on MLOps and production workflows,
+so we proceed with the current model configuration.
+
+
 ## Functional features 
 - **Model Training**: Train a model for fraud detection.
 - **Deployment**: Deploy the model via dockerized Flask API.
