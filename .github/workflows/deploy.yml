@@ -2,7 +2,7 @@ name: deploy model
 
 on:
   workflow_run:
-    workflows: ["train model"]
+    workflows: [ "train model" ]
     types:
       - completed
   workflow_dispatch:
@@ -34,8 +34,11 @@ jobs:
           docker push mahmoudalbardan/fraudapp:latest
           docker push mahmoudalbardan/fraudapp:${{github.sha}}
 
-      - name: deploy on server
+      - name: deploy gcp to vm
         run: |
-          echo "ssh to a server then pull docker image from dockerhub and run it .. it will not complete the workflow"
-          ssh mab@blablablaserver docker pull mahmoudalbardan/fraudapp:latest
-          ssh mab@blablablaserver docker run mahmoudalbardan/fraudapp:latest
+          echo "ssh to a gcp compute engine then pull docker image from dockerhub and run it .. it will not complete the workflow"
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" | base64 --decode > gcpkey.json
+          gcloud auth activate-service-account --key-file=gcpkey.json
+          gcloud config set project XXXX
+          gcloud compute ssh XXXXX@XXXX docker pull mahmoudalbardan/fraudapp:latest
+          gcloud compute ssh XXXXX@XXXX docker run mahmoudalbardan/fraudapp:latest
