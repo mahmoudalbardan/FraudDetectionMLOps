@@ -27,7 +27,7 @@ with github actions, integrating with Google Cloud Platform that is used to stor
 ### Install Dependencies
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/mahmoudalbardan/test.git
+git clone https://github.com/mahmoudalbardan/FraudDetectionMLOps.git
 cd test
 pip install -r requirements.txt
 ```
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 To train the model locally, use the data already stored in Google Cloud Storage
 by following these steps:
 1. Create a service account in your GCP project and download its key (in JSON format).
-2. Copy the key to the `test/` directory.
+2. Copy the key to the `FraudDetectionMLOps/` directory.
 3. Open a terminal and run:
 ```bash
  export GOOGLE_APPLICATION_CREDENTIALS=<your-key-name>
