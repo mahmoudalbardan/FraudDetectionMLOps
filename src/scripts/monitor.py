@@ -7,11 +7,10 @@ from utils import get_config, parse_args
 
 def load_updated_data():
     """
-    Load the sample data for monitoring and modify the target variable.
-
-    This function reads the sample data from the specified path in the configuration,
+    Load the updated data for monitoring and modify the target variable.
+    This function reads the sample data from GCP storage bucket which is used to test monitoring step,
     modifies the 'Class' target variable to 1 to simulate a scenario where the model
-    is expected to retrain. This is done to test the retraining process effectively.
+    is expected to be retrained.
 
     Returns
     -------
@@ -69,9 +68,6 @@ def monitor(config):
 
 
 if __name__ == "__main__":
-    # Parse command line arguments and load configuration
     args = parse_args()
     config = get_config(args.configuration)
-
-    # Start monitoring the model's performance
     monitor(config)

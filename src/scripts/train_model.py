@@ -10,9 +10,8 @@ from utils import get_config, parse_args
 def fit_model(data_transformed):
     """
     Fit an Isolation Forest model to the transformed data.
-
     This function preprocesses the feature data by scaling it using
-    StandardScaler, then fits an Isolation Forest model to identify anomalies.
+    StandardScaler, then fits an Isolation Forest model.
 
     Parameters
     ----------
@@ -36,7 +35,6 @@ def fit_model(data_transformed):
 def evaluate_model(model, data_transformed):
     """
     Evaluate the fitted model's performance.
-
     This function calculates and prints the recall, precision, and F1 score
     for the predictions made by the model on the transformed data.
 
@@ -78,17 +76,15 @@ def evaluate_model(model, data_transformed):
 def save_model(model, model_path):
     """
     Save the trained model to a specified file path.
-
-    This function uses joblib to save the fitted model, allowing for
-    later use without needing to retrain.
+    This function uses joblib to save the fitted model.
 
     Parameters
     ----------
     model : IsolationForest
-        The fitted Isolation Forest model to save.
+        The fitted Isolation Forest model.
 
     model_path : str
-        The file path where the model will be saved.
+        The model file path it will be saved.
 
     Returns
     -------
@@ -99,10 +95,7 @@ def save_model(model, model_path):
 
 def main(args):
     """
-    Main function to handle model training and evaluation workflow.
-
-    This function retrieves the configuration, processes the data based on the
-    retrain flag, fits the model, evaluates it, and saves the trained model.
+    Main function
 
     Parameters
     ----------

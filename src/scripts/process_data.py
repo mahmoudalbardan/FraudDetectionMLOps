@@ -4,16 +4,14 @@ import seaborn as sns
 from google.cloud import storage
 import pandas as pd
 from io import StringIO
-
-# Set Seaborn theme for plots
 sns.set_theme(style="whitegrid")
 
 
 def read_file(gcs_bucket_name, gcs_filename):
     """
-    Read a CSV file from Google Cloud Storage.
+    Read a CSV file from GCP storage bucket.
 
-    This function connects to Google Cloud Storage, retrieves the specified CSV file,
+    This function connects to Google Cloud Storage, extract the specified CSV file,
     and loads it into a Pandas DataFrame.
 
     Parameters
@@ -39,25 +37,22 @@ def read_file(gcs_bucket_name, gcs_filename):
 
 def explore_data(data):
     """
-    Perform exploratory data analysis on a DataFrame.
-
-    This function provides information about the DataFrame, descriptive statistics,
-    and class frequency distribution. It also generates histogram plots for each feature.
+    Perform exploratory data analysis on the dataframe.
 
     Parameters
     ----------
     data : pd.DataFrame
-        The DataFrame containing the data to be explored.
+        The DataFrame containing the data transactions.
 
     Returns
     -------
     tuple
         A tuple containing:
-        - None: Info summary of the DataFrame (printed, not returned).
+        - pd.DataFrame: Info summary of the DataFrame.
         - pd.DataFrame: Descriptive statistics of the DataFrame.
         - pd.Series: Frequency count of each class in the 'Class' column.
     """
-    data_info = data.info()  # Print info summary
+    data_info = data.info()
     data_describe = data.describe()
     data_class_frequency = data['Class'].value_counts()
     features = data.columns[:-1]
@@ -79,12 +74,12 @@ def transform_data(data):
     Transform features in the DataFrame to reduce skewness.
 
     This function applies a log transformation to features in the DataFrame
-    that have a skewness greater than 2, which helps in normalizing the distribution.
+    that have a skewness greater than 2.
 
     Parameters
     ----------
     data : pd.DataFrame
-        The DataFrame containing the data to be transformed.
+        The original dataframe.
 
     Returns
     -------
@@ -104,10 +99,7 @@ def transform_data(data):
 
 def process_data(gcs_bucket_name, gcs_filename):
     """
-    Process data by reading from Google Cloud Storage and transforming it.
-
-    This function combines reading the data from Google Cloud Storage and
-    transforming the features to reduce skewness.
+    Process the transaction data by reading from Google Cloud Storage and transforming it.
 
     Parameters
     ----------
