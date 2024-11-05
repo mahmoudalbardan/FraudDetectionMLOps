@@ -28,7 +28,7 @@ with github actions, integrating with Google Cloud Platform that is used to stor
 Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/mahmoudalbardan/FraudDetectionMLOps.git
-cd test
+cd FraudDetectionMLOps
 pip install -r requirements.txt
 ```
 ## Launching and deployment
