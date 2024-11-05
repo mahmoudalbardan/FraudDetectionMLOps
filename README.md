@@ -1,33 +1,28 @@
 # Fraud Detection Project
 
-This repository contains a machine learning pipeline designed for fraud detection, 
+This repository contains a ML pipeline designed for fraud detection, 
 that includes principal steps of model lifecycle management. It begins with training
 an anomaly detection model using Isolation Forest, deploys the model through 
-a Dockerized Flask API to handle real-time predictions, and implements model 
+a dockerized Flask API to handle real-time predictions, and implements model 
 performance monitoring. The project also includes CI/CD automation with 
-GitHub Actions, integrating with Google Cloud Platform (GCP) that I used to store the data.
+with github actions, integrating with Google Cloud Platform that is used to store the data.
 
 
 ## Functional features in this project
-- **Model Training**: Train a model for fraud detection using structured data.
-- **Deployment**: Deploy the model via Dockerized Flask API.
-- **Monitoring**: Monitor model performance and trigger retraining if accuracy degrades.
+- **Model Training**: Train a model for fraud detection.
+- **Deployment**: Deploy the model via dockerized Flask API.
+- **Monitoring**: Monitor model performance and trigger retraining if the preformance degrades.
 
 ## Repository Structure
-- `.github/workflows/`: GitHub actions workflows for ci/cd and MLOps
-- `experimental/`: contains script to test the prediction flask app
-- `src/`: contains Python scripts for data processing, training, and monitoring.
-- `tests/`: contains scripts for unit testing.
+- `.github/workflows/`: GitHub actions workflows for CI/CD and MLOps
+- `experimental/`: Contains script to test the prediction flask app
+- `src/`: Contains Python scripts for data processing, training, and monitoring.
+- `tests/`: Contains scripts for unit testing.
 - `Dockerfile`: Docker file for deploying the model API.
-- `configuration.ini`: configuration for model parameters and file paths.
-- `requirements.txt`: requirements file.
+- `configuration.ini`: Configuration for model parameters and file paths.
+- `requirements.txt`: Requirements file.
 
 ## Setup and Installation
-
-### Prerequisites
-1. **Python 3.7+**
-2. **Google Cloud SDK**
-3. **Docker**
 
 ### Install Dependencies
 Clone the repository and install dependencies:
@@ -45,25 +40,26 @@ by following these steps:
 3. Open a terminal and run:
 ```bash
  export GOOGLE_APPLICATION_CREDENTIALS=<your-key-name>
-```
+ ```
 4. Run the training script:
 ```bash
-python src/scripts/train_model.py --configuration configuration.ini --retrain false                                                                                                                                                                                                                                                                                                                                               -configuration configuration.ini --retrain false
+python src/scripts/train_model.py --configuration configuration.ini --retrain false
 ```
 The model will be automaticaly saved in: `src/model/fraud_detection_model.pkl`
 
 5. Build docker image:
 ```bash
-docker build -t fraudapp .                                                                                                                                                                                                                                                                                                                                      -configuration configuration.ini --retrain false
+docker build -t fraudapp .
 ```
 6.  Run docker container:
 ```bash
-docker run -p 5000:5000 fraudapp                                                                                                                                                                                                                                                                                                                                   -configuration configuration.ini --retrain false
+docker run -p 5000:5000 fraudapp
 ```
 7. Test the app by running the following script:
 ```bash
-python src/experimental/testing_the_app.py                                                                                                                                                                                                                                                                                                                                        -configuration configuration.ini --retrain false
+python experimental/testing_the_app.py
 ```
+
 ###  MLOps with GitHub actions
 The `.github/workflows` directory in the project repository contains 4 workflow `.yml` files:
 1. `build_and_test.yml`: it automates the process of checking out the code, setting up the python
