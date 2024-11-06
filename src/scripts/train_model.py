@@ -23,7 +23,7 @@ def fit_model(data_transformed):
     IsolationForest
         The fitted Isolation Forest model.
     """
-    X = data_transformed.drop(columns=['Class'])  # Features
+    X = data_transformed.drop(columns=['Class'])
     X_scaled = StandardScaler().fit_transform(X)
     model = IsolationForest(n_estimators=100,
                             contamination=0.05,
@@ -85,10 +85,6 @@ def save_model(model, model_path):
 
     model_path : str
         The model file path it will be saved.
-
-    Returns
-    -------
-    None
     """
     joblib.dump(model, model_path)
 
@@ -101,10 +97,6 @@ def main(args):
     ----------
     args : Namespace
         Parsed command line arguments containing configuration and retrain flag.
-
-    Returns
-    -------
-    None
     """
     config = get_config(args.configuration)
     retrain = args.retrain

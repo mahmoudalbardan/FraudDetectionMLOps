@@ -5,7 +5,6 @@ import configparser
 def parse_args():
     """
     Parse command line arguments.
-
     This function sets up the argument parser to handle command line
     input for the configuration file and retrain flag. It defines
     the expected arguments and their types.
@@ -34,7 +33,6 @@ def parse_args():
 def get_config(configfile):
     """
     Read a configuration file.
-
     This function reads the specified configuration file using the
     configparser module and returns the configuration object.
 

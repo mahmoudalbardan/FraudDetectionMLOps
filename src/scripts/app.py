@@ -18,7 +18,7 @@ def predict():
         - 1 indicates a fraudulent transaction.
         - 0 indicates a non-fraudulent transaction.
     """
-    test_data = np.array(request.json).reshape(1, -1)  # given that data is in json format
+    test_data = np.array(request.json).reshape(1, -1)
     prediction = 1 if model.predict(test_data) == -1 else 0
     return jsonify(prediction)
 

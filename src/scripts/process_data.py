@@ -10,9 +10,8 @@ sns.set_theme(style="whitegrid")
 def read_file(gcs_bucket_name, gcs_filename):
     """
     Read a CSV file from GCP storage bucket.
-
     This function connects to Google Cloud Storage, extract the specified CSV file,
-    and loads it into a Pandas DataFrame.
+    "credictcard.csv" and loads it into a Pandas DataFrame.
 
     Parameters
     ----------
@@ -24,7 +23,7 @@ def read_file(gcs_bucket_name, gcs_filename):
     Returns
     -------
     pd.DataFrame
-        The contents of the CSV file as a Pandas DataFrame.
+        The contents of "credictcard.csv".
     """
     storage_client = storage.Client()
     bucket = storage_client.bucket(gcs_bucket_name)
@@ -62,7 +61,7 @@ def explore_data(data):
     axes = axes.flatten()
     for j, feature in enumerate(features):
         sns.histplot(data[feature].values, bins=30, color="c", kde=True, ax=axes[j])
-        axes[j].set_title(f"Histogram of {feature}")  # Use f-string for clarity
+        axes[j].set_title(f"Histogram of {feature}")
         axes[j].set_xlabel(feature)
 
     plt.show()
