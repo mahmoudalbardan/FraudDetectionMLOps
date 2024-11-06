@@ -15,7 +15,7 @@ and an Isolation Forest model is trained on the transformed data. For this fraud
 of fraudulent transactions. Precision is also important since low precision could lead to mislabeling 
 many legitimate transactions as fraudulent, affecting user experience and trust.
 The current model performance are 81% for recall and 6% for precision. 
-While the model requires more improvement through EDA
+While the model requires improvement through EDA
 and feature engineering, this project focuses on MLOps and production workflows,
 so we proceed with the current model configuration.
 
