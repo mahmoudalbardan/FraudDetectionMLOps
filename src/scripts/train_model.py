@@ -33,10 +33,10 @@ def fit_model(data_transformed):
                             contamination=0.05,
                             random_state=42)
     model.fit(X_scaled)
-    return model
+    return model,pca
 
 
-def evaluate_model(model, data_transformed):
+def evaluate_model(model,pca, data_transformed):
     """
     Evaluate the fitted model's performance.
     This function calculates and prints the recall, precision, and F1 score
@@ -62,6 +62,8 @@ def evaluate_model(model, data_transformed):
             The F1 score of the model.
     """
     X = data_transformed.drop(columns=['Class'])
+    X = pca.fit_transform(X)
+
     y_true = data_transformed["Class"].values.tolist()
     y_pred = model.predict(X)
     y_pred = [1 if i == -1 else 0 for i in y_pred]
@@ -112,8 +114,8 @@ def main(args):
         data_transformed = process_data(config["FILES"]["GCS_BUCKET_NAME"],
                                         config["FILES"]["SAMPLE_GCS_FILE_NAME"])
 
-    model = fit_model(data_transformed)
-    recall, precision, f1s = evaluate_model(model, data_transformed)
+    model,pca = fit_model(data_transformed)
+    recall, precision, f1s = evaluate_model(model,pca, data_transformed)
     print(recall, precision)
     save_model(model, config["FILES"]["MODEL_PATH"])
 
