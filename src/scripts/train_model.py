@@ -26,11 +26,11 @@ def fit_model(data_transformed):
     """
     X = data_transformed.drop(columns=['Class'])
     X_scaled = StandardScaler().fit_transform(X)
-    pca = PCA(n_components=5)
+    pca = PCA(n_components=10)
     X_scaled = pca.fit_transform(X_scaled)
 
     model = IsolationForest(n_estimators=100,
-                            contamination=0.05,
+                            contamination=0.01,
                             random_state=42)
     model.fit(X_scaled)
     return model,pca
