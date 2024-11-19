@@ -2,6 +2,7 @@ import joblib
 from sklearn.ensemble import IsolationForest
 from sklearn.metrics import recall_score, precision_score, f1_score
 from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 from process_data import process_data
 from utils import get_config, parse_args
@@ -25,6 +26,9 @@ def fit_model(data_transformed):
     """
     X = data_transformed.drop(columns=['Class'])
     X_scaled = StandardScaler().fit_transform(X)
+    pca = PCA(n_components=5)
+    X_scaled = pca.fit_transform(X_scaled)
+
     model = IsolationForest(n_estimators=100,
                             contamination=0.05,
                             random_state=42)
@@ -110,6 +114,7 @@ def main(args):
 
     model = fit_model(data_transformed)
     recall, precision, f1s = evaluate_model(model, data_transformed)
+    print(recall, precision)
     save_model(model, config["FILES"]["MODEL_PATH"])
 
 
